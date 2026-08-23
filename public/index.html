@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>KDBot Dashboard</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #0b0d10;
+      color: #ffffff;
+      min-height: 100vh;
+    }
+
+    .header {
+      padding: 25px;
+      border-bottom: 1px solid #242830;
+      background: #111419;
+    }
+
+    .logo {
+      font-size: 26px;
+      font-weight: bold;
+    }
+
+    .logo span {
+      color: #ff7a00;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 35px 20px;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 50px 20px;
+    }
+
+    .hero h1 {
+      font-size: 42px;
+      margin-bottom: 15px;
+    }
+
+    .hero h1 span {
+      color: #ff7a00;
+    }
+
+    .hero p {
+      color: #aeb4bf;
+      font-size: 18px;
+      margin-bottom: 30px;
+    }
+
+    .login {
+      display: inline-block;
+      padding: 14px 25px;
+      background: #5865f2;
+      color: white;
+      text-decoration: none;
+      border-radius: 9px;
+      font-weight: bold;
+    }
+
+    .login:hover {
+      opacity: 0.9;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+      margin-top: 35px;
+    }
+
+    .card {
+      background: #15181e;
+      border: 1px solid #242830;
+      border-radius: 12px;
+      padding: 25px;
+    }
+
+    .card h3 {
+      color: #aeb4bf;
+      font-size: 15px;
+      margin-bottom: 12px;
+    }
+
+    .value {
+      font-size: 25px;
+      font-weight: bold;
+    }
+
+    .online {
+      color: #43d17b;
+    }
+
+    footer {
+      text-align: center;
+      color: #6f7682;
+      padding: 40px 20px;
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 {
+        font-size: 32px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="header">
+    <div class="logo">
+      <span>KD</span>Bot
+    </div>
+  </header>
+
+  <main class="container">
+
+    <section class="hero">
+      <h1>مرحباً بك في <span>KDBot</span></h1>
+
+      <p>
+        لوحة تحكم متكاملة لإدارة بوت الديسكورد الخاص بك.
+      </p>
+
+      <a class="login" href="/login">
+        تسجيل الدخول بواسطة Discord
+      </a>
+    </section>
+
+    <section class="cards">
+
+      <div class="card">
+        <h3>حالة البوت</h3>
+        <div class="value online" id="status">
+          جاري الفحص...
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>اسم البوت</h3>
+        <div class="value" id="bot">
+          KDBot
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>الإصدار</h3>
+        <div class="value" id="version">
+          1.0.0
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer>
+    KDBot Dashboard © 2026
+  </footer>
+
+  <script>
+    fetch("/api/status")
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById("status").textContent =
+          data.online ? "Online" : "Offline";
+
+        document.getElementById("bot").textContent = data.bot;
+        document.getElementById("version").textContent = data.version;
+      })
+      .catch(() => {
+        document.getElementById("status").textContent = "Offline";
+      });
+  </script>
+
+</body>
+</html>
