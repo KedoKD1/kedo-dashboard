@@ -144,6 +144,7 @@
 
       <div class="card">
         <h3>حالة البوت</h3>
+
         <div class="value online" id="status">
           جاري الفحص...
         </div>
@@ -151,6 +152,7 @@
 
       <div class="card">
         <h3>اسم البوت</h3>
+
         <div class="value" id="bot">
           KDBot
         </div>
@@ -158,6 +160,7 @@
 
       <div class="card">
         <h3>الإصدار</h3>
+
         <div class="value" id="version">
           1.0.0
         </div>
@@ -171,20 +174,7 @@
     KDBot Dashboard © 2026
   </footer>
 
-  <script>
-    fetch("/api/status")
-      .then(response => response.json())
-      .then(data => {
-        document.getElementById("status").textContent =
-          data.online ? "Online" : "Offline";
-
-        document.getElementById("bot").textContent = data.bot;
-        document.getElementById("version").textContent = data.version;
-      })
-      .catch(() => {
-        document.getElementById("status").textContent = "Offline";
-      });
-  </script>
+  <script src="/app.js"></script>
 
 </body>
 </html>
